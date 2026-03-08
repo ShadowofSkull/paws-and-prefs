@@ -9,7 +9,7 @@ const variants = {
   }),
 };
 
-export default function CatCard({ cat, onSwipeRight, onSwipeLeft, isTop, index }) {
+export default function CatCard({ cat, imageUrl, onSwipeRight, onSwipeLeft, isTop, index }) {
   // Track the X position of the drag
   const x = useMotionValue(0);
   const exitDirection = useRef(0);
@@ -55,12 +55,14 @@ export default function CatCard({ cat, onSwipeRight, onSwipeLeft, isTop, index }
     >
       {/* Background color acts as a skeleton loader before the image loads */}
       <div className="w-full h-full bg-gray-200">
-        <img 
-          src={`https://cataas.com/cat/${cat.id}`} 
-          alt="A cute cat" 
-          className="w-full h-full object-cover pointer-events-none" 
-          draggable="false"
-        />
+        {imageUrl && (
+          <img 
+            src={imageUrl} 
+            alt="A cute cat" 
+            className="w-full h-full object-cover pointer-events-none" 
+            draggable="false"
+          />
+        )}
       </div>
       
       {/* LIKE Stamp Overlay */}

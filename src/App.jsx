@@ -4,17 +4,26 @@ import CatCard from "./CatCard";
 
 export default function App() {
   const [cats, setCats] = useState([]);
+  const [imageUrls, setImageUrls] = useState({});
   const [likedCats, setLikedCats] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the default 10 cats
     fetch("https://cataas.com/api/cats")
       .then((res) => res.json())
       .then((data) => {
         setCats(data);
-        setLoading(false);
+        data.forEach((cat, i) => {
+          fetch(`https://cataas.com/cat/${cat.id}`)
+            .then((res) => res.blob())
+            .then((blob) => {
+              const url = URL.createObjectURL(blob);
+              setImageUrls((prev) => ({ ...prev, [cat.id]: url }));
+              if (i === 0) setLoading(false);
+            })
+            .catch((err) => console.error("Failed to fetch image:", err));
+        });
       })
       .catch((err) => console.error("Failed to fetch cats:", err));
   }, []);
@@ -55,6 +64,7 @@ export default function App() {
                 <CatCard
                   key={cat.id}
                   cat={cat}
+                  imageUrl={imageUrls[cat.id]}
                   isTop={isTop}
                   index={cats.slice(currentIndex, currentIndex + 3).length - 1 - visualIndex}
                   onSwipeRight={handleSwipeRight}
@@ -73,7 +83,7 @@ export default function App() {
             {likedCats.map((cat) => (
               <img 
                 key={cat.id} 
-                src={`https://cataas.com/cat/${cat.id}`} 
+                src={imageUrls[cat.id]} 
                 alt="Liked cat" 
                 className="w-full h-40 object-cover rounded-xl shadow-md border-2 border-white bg-gray-200"
               />
