@@ -49,12 +49,12 @@ export default function CatCard({ cat, imageUrl, onSwipeRight, onSwipeLeft, isTo
       custom={exitDirection}
       variants={variants}
       exit="exit"
-      className={`absolute w-[min(20rem,90vw)] h-[min(24rem,65dvh)] bg-white rounded-3xl shadow-xl overflow-hidden ${
+      className={`absolute w-[min(20rem,90vw)] h-[min(24rem,65dvh)] bg-[#FDFAF7] rounded-3xl shadow-[0_8px_30px_rgba(100,70,50,0.18)] overflow-hidden ${
         isTop ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
       }`}
     >
       {/* Background color acts as a skeleton loader before the image loads */}
-      <div className="w-full h-full bg-gray-200">
+      <div className="w-full h-full bg-[#E8DDD4]">
         {imageUrl && (
           <img 
             src={imageUrl} 
@@ -68,7 +68,7 @@ export default function CatCard({ cat, imageUrl, onSwipeRight, onSwipeLeft, isTo
       {/* LIKE Stamp Overlay */}
       <motion.div 
         style={{ opacity: likeOpacity }}
-        className="absolute top-8 left-8 border-4 border-green-500 text-green-500 font-extrabold text-4xl rounded-md px-2 py-1 transform -rotate-12 pointer-events-none"
+        className="absolute top-8 left-8 border-4 border-[#2DB34A] text-[#2DB34A] font-extrabold text-4xl rounded-md px-2 py-1 transform -rotate-12 pointer-events-none"
       >
         CUTE
       </motion.div>
@@ -76,9 +76,9 @@ export default function CatCard({ cat, imageUrl, onSwipeRight, onSwipeLeft, isTo
       {/* NOPE Stamp Overlay */}
       <motion.div 
         style={{ opacity: nopeOpacity }}
-        className="absolute top-8 right-8 border-4 border-red-500 text-red-500 font-extrabold text-4xl rounded-md px-2 py-1 transform rotate-12 pointer-events-none"
+        className="absolute top-8 right-8 border-4 border-[#E8442A] text-[#E8442A] font-extrabold text-4xl rounded-md px-2 py-1 transform rotate-12 pointer-events-none"
       >
-        MEH
+        HMM
       </motion.div>
     </motion.div>
   );

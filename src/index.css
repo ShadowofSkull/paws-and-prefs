@@ -3,4 +3,11 @@
 /* Prevents pull-to-refresh and bouncy scrolling on mobile devices */
 body {
   overscroll-behavior-y: none;
+  background-color: #FAF6F1;
+}
+
+@keyframes paw-bob {
+  0%, 100% { transform: translateY(0) rotate(-8deg) scale(1); }
+  40%       { transform: translateY(-14px) rotate(4deg) scale(1.15); }
+  70%       { transform: translateY(-6px) rotate(-3deg) scale(1.07); }
 }
