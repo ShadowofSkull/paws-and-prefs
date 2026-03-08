@@ -40,7 +40,7 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 h-screen bg-[#FAF6F1]">
+      <div className="cat-bg flex flex-col items-center justify-center gap-4 h-screen bg-[#FAF6F1]">
         <span
           style={{ animation: "paw-bob 1s ease-in-out infinite" }}
           className="text-6xl select-none"
@@ -56,7 +56,7 @@ export default function App() {
 
   if (showIntro) {
     return (
-      <div className="flex flex-col items-center justify-center gap-8 h-screen bg-[#FAF6F1] px-8">
+      <div className="cat-bg flex flex-col items-center justify-center gap-8 h-screen bg-[#FAF6F1] px-8">
         <div className="text-center">
           <p className="text-4xl mb-3">🐱</p>
           <h1 className="text-2xl font-extrabold text-[#7C5C4A] mb-1">Paws & Preferences</h1>
@@ -95,7 +95,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col items-center h-dvh bg-[#FAF6F1] overflow-hidden relative touch-none">
+    <div className="cat-bg flex flex-col items-center h-dvh bg-[#FAF6F1] overflow-hidden relative touch-none">
       <header className="w-full p-6 text-center shadow-sm bg-white z-20">
         <h1 className="text-2xl font-extrabold text-[#7C5C4A]">Paws & Preferences</h1>
       </header>

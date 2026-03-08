@@ -6,6 +6,27 @@ body {
   background-color: #FAF6F1;
 }
 
+.cat-bg {
+  position: relative;
+}
+
+.cat-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/cat-print.svg');
+  background-repeat: repeat;
+  background-size: 220px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cat-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
 @keyframes paw-bob {
   0%, 100% { transform: translateY(0) rotate(-8deg) scale(1); }
   40%       { transform: translateY(-14px) rotate(4deg) scale(1.15); }
