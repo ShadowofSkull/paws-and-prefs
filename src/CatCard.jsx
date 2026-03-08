@@ -1,8 +1,18 @@
+import { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
+
+const variants = {
+  exit: (dirRef) => ({
+    x: dirRef.current > 0 ? 500 : -500,
+    opacity: 0,
+    transition: { duration: 0.3 },
+  }),
+};
 
 export default function CatCard({ cat, onSwipeRight, onSwipeLeft, isTop, index }) {
   // Track the X position of the drag
   const x = useMotionValue(0);
+  const exitDirection = useRef(0);
   
   // Map the X position to a rotation angle (-15 to 15 degrees)
   const rotate = useTransform(x, [-200, 200], [-15, 15]);
@@ -11,11 +21,12 @@ export default function CatCard({ cat, onSwipeRight, onSwipeLeft, isTop, index }
   const likeOpacity = useTransform(x, [0, 100], [0, 1]);
   const nopeOpacity = useTransform(x, [0, -100], [0, 1]);
 
-  const handleDragEnd = (event, info) => {
-    // If dragged further than 100px, trigger the respective swipe action
+  const handleDragEnd = (_, info) => {
     if (info.offset.x > 100) {
+      exitDirection.current = 1;
       onSwipeRight(cat);
     } else if (info.offset.x < -100) {
+      exitDirection.current = -1;
       onSwipeLeft();
     }
   };
@@ -34,10 +45,11 @@ export default function CatCard({ cat, onSwipeRight, onSwipeLeft, isTop, index }
         y: isTop ? 0 : index * 15,
         zIndex: 10 - index
       }}
-      // Smoothly fly off the screen when unmounted
-      exit={{ x: x.get() > 0 ? 500 : -500, opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`absolute w-80 h-96 bg-white rounded-3xl shadow-xl overflow-hidden ${
+      // Pass the ref as custom so the variant function reads .current at exit time
+      custom={exitDirection}
+      variants={variants}
+      exit="exit"
+      className={`absolute w-[min(20rem,90vw)] h-[min(24rem,65dvh)] bg-white rounded-3xl shadow-xl overflow-hidden ${
         isTop ? "cursor-grab active:cursor-grabbing" : "pointer-events-none"
       }`}
     >

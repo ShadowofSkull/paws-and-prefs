@@ -39,13 +39,13 @@ export default function App() {
   const isFinished = currentIndex >= cats.length;
 
   return (
-    <div className="flex flex-col items-center h-screen bg-pink-50 overflow-hidden relative touch-none">
+    <div className="flex flex-col items-center h-dvh bg-pink-50 overflow-hidden relative touch-none">
       <header className="w-full p-6 text-center shadow-sm bg-white z-20">
         <h1 className="text-2xl font-extrabold text-pink-500">Paws & Preferences</h1>
       </header>
 
       {!isFinished ? (
-        <div className="relative w-80 h-96 mt-20 flex-grow flex justify-center">
+        <div className="flex-1 relative w-full flex items-center justify-center">
           <AnimatePresence>
             {cats.slice(currentIndex, currentIndex + 3).reverse().map((cat, visualIndex) => {
               const actualIndex = currentIndex + (cats.slice(currentIndex, currentIndex + 3).length - 1 - visualIndex);
@@ -65,7 +65,7 @@ export default function App() {
           </AnimatePresence>
         </div>
       ) : (
-        <div className="flex flex-col items-center mt-6 p-6 overflow-y-auto w-full max-w-md h-full pb-20">
+        <div className="flex flex-col items-center flex-1 min-h-0 overflow-y-auto w-full max-w-md p-6 pb-10">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">Match Summary</h2>
           <p className="text-gray-500 mb-6">You liked {likedCats.length} cats!</p>
           
